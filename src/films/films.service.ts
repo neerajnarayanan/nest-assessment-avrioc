@@ -22,4 +22,8 @@ export class FilmsService {
             createdAt: new Date(),
         }).save();
     }
+
+    async deleteOne(id: any): Promise<Film[]> {
+        return await this.model.remove({_id:id}).exec();
+    }
 }

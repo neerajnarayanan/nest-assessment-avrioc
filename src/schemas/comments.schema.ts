@@ -1,25 +1,27 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, ObjectId } from 'mongoose';
 
 export type CommentsDocument = Comments & Document;
 @Schema()
 export class Comments {
-  @Prop({ required: true })
-  id: number;
+
+  @Prop({required: true})
+  film_id: [{
+    type: ObjectId,
+    ref: "films" // this name should be same as the model name specified while declaring model
+}]
 
   @Prop()
-  film_id?: number;
+  comment: string;
 
-  @Prop()
-  comment?: string;
+  @Prop({required: true})
+  user_id: [{ type: ObjectId, ref: 'users' }]
 
-  @Prop()
-  user_id?: number;
 
   @Prop()
   createdAt?: Date;
 
-  @Prop({ required: true })
+  @Prop()
   updatedAt: Date;
 }
 

@@ -6,6 +6,7 @@ import {
     Param,
     Post,
     Put,
+    Query,
   } from '@nestjs/common';
 
   import { FilmsService } from './films.service';
@@ -28,4 +29,9 @@ export class FilmsController {
     async create(@Body() createTodoDto: any) {
       return await this.service.create(createTodoDto);
     }
+
+    @Delete()
+     async deleteFilm(@Query('id') id: any) {
+        return await this.service.deleteOne(id);
+   }
 }
